@@ -1,6 +1,7 @@
 import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
-from flask import Flask, Response, request, render_template
+from flask import Flask, Response, request, render_template, jsonify
+from flask_cors import CORS
 from pybadges import badge
 from hashlib import md5
 import requests
@@ -19,6 +20,17 @@ sched.add_job(waker, 'interval', seconds=3)
 sched.start()
 
 app = Flask(__name__)
+CORS(app, resources={
+     r"/.*": {"origins": ["http://127.0.0.1", "http://uptimerobot.com"]}})
+
+
+@app.route("/kimi")
+def kimi() -> Response:
+    print("Hello Kimi")
+    return jsonify(
+        username="Kimi Tsai",
+        github="https://github.com/kimi0230"
+    )
 
 
 def invalid_count_resp(err_msg) -> Response:
@@ -48,7 +60,7 @@ def update_counter(key):
         return None
 
 
-@app.route("/badge")
+@ app.route("/badge")
 def visitor_svg() -> Response:
     """
     Return a svg badge with latest visitor count of 'Referer' header value

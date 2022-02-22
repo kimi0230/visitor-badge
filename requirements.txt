@@ -3,4 +3,5 @@ pybadges
 gunicorn
 requests
 python-dotenv
+flask_cors
 APScheduler==3.8.1
