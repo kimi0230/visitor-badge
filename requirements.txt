@@ -3,3 +3,4 @@ pybadges
 gunicorn
 requests
 python-dotenv
+APScheduler==3.8.1
